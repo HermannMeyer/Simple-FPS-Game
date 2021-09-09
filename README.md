@@ -1,5 +1,7 @@
 # IS Project
 
+## Warning: This is a legacy branch, intended to maintain a version of the prototype before the addition of ray tracing. 
+
 ## Overview
 This is a prototype wave-based survival first-person shooter (FPS) video game, which is the focus of the creator's Senior Independent Study for the College of Wooster's class of 2022. The main purpose of this project is to explore the processes behind designing and creating a video game. As the project progresses, there are many other features that could be explored and potentially added into the game, as detailed below. This project is made with Unity version 2021.1.18f1 and written in C#.
 
