@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -13,6 +14,8 @@ public class GameDirector : MonoBehaviour
     public float waveCooldown;
     public int enemiesRemaining;
     public EnemySpawner enemySpawner;
+    public Text waveDisplay;
+    public Text waveTimer;
 
     GameObject player;
     PlayerHealth health;
@@ -44,7 +47,9 @@ public class GameDirector : MonoBehaviour
 
         // Reset the current enemy count to zero
         enemySpawner.ResetCounts();
-        
+
+        // Update the wave UI
+        UpdateWaveUI();
     }
 
     // Update is called once per frame
@@ -91,6 +96,13 @@ public class GameDirector : MonoBehaviour
             else
             {
                 waveCooldown -= Time.deltaTime;
+                // Run the timer UI
+                if (!waveTimer.gameObject.activeSelf)
+                {
+                    waveTimer.gameObject.SetActive(true);
+                }
+                waveTimer.text = waveCooldown.ToString("F1") + " seconds before next wave!";
+
 
                 // If the countdown for next wave is up and wave is not in progress
                 // Set wave to be in progress
@@ -99,6 +111,15 @@ public class GameDirector : MonoBehaviour
                     waveInProgress = true;
                     currentWave++;
                     waveCooldown = timeBetweenWaves;
+
+                    // Disable the timer UI
+                    if (waveTimer.gameObject.activeSelf)
+                    {
+                        waveTimer.gameObject.SetActive(false);
+                    }
+
+                    // Update the wave UI
+                    UpdateWaveUI();
                 }
             }
         }
@@ -110,6 +131,11 @@ public class GameDirector : MonoBehaviour
             print("Game Over!");
             print("Wave " + currentWave + "/" + maxWave);
         }
+    }
+
+    void UpdateWaveUI()
+    {
+        waveDisplay.text = "Wave: " + currentWave + "/" + maxWave;
     }
 
     void EndGame()
