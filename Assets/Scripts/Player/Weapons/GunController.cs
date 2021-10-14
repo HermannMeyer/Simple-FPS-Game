@@ -53,7 +53,7 @@ public class GunController : MonoBehaviour
         }
     }
 
-    void Shoot()
+    public void Shoot()
     {
         // Muzzle Flash effect
         muzzleFlash.Play();
@@ -80,7 +80,7 @@ public class GunController : MonoBehaviour
         ammoInMag--;
     }
 
-    IEnumerator Reload()
+    public IEnumerator Reload()
     {
         isReloading = true;
 
@@ -108,7 +108,7 @@ public class GunController : MonoBehaviour
         isReloading = false;
     }
 
-    void Refill()
+    public void Refill()
     {
         ammoCount = maxAmmoCount;
         ammoInMag = magazineSize;
