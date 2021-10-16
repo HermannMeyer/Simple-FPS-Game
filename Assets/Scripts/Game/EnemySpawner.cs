@@ -20,7 +20,6 @@ public class EnemySpawner : MonoBehaviour
     int bruteCount = 0;
     int exploderCount = -1;
     int carrierCount = -1;
-    // A struct to represent enemies?
    
     // Start is called before the first frame update
     void Start()

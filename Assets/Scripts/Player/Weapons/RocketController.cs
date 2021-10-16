@@ -10,13 +10,11 @@ public class RocketController : MonoBehaviour
     public float moveForce = 100f;
     Camera mainCamera;
 
-    bool hasExploded = false;
     Rigidbody rb;
     Vector3 direction;
 
     private void OnCollisionEnter(Collision collision)
     {
-        hasExploded = true;
         Explode();
     }
 

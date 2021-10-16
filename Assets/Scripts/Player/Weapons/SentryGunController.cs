@@ -1,7 +1,4 @@
 using UnityEngine;
-#if UNITY_EDITOR
-using UnityEditor;
-#endif
 
 // Detects when a given target is visible to this object. A target is
 // visible when it's both in range and in front of the target. Both the
@@ -11,6 +8,7 @@ public class SentryGunController : MonoBehaviour
 
     // The object we're looking for.
     public Transform target = null;
+    public GameObject rotatingPart;
 
     // If the object is more than this distance away, we can't see it.
     public float maxDistance = 10f;
@@ -19,27 +17,36 @@ public class SentryGunController : MonoBehaviour
     [Range(0f, 360f)]
     public float angle = 45f;
 
-    // If true, visualize changes in visilibity by changing
-    // material color
-    [SerializeField] bool visualize = true;
-
     // A property that other classes can access to determine if we can
     // currently see our target.
     public bool targetIsVisible { get; private set; }
 
+    // The gun's rotation speed
+    public float rotationSpeed;
+
+    // Indicates whether the sentry gun is locked on a target or not
+    // If so, engage the target until it is neutralized
+    bool isLocked = false;
+
     // Check to see if we can see the target every frame.
     void Update()
     {
-        targetIsVisible = CheckVisibility();
-
-        if (visualize)
+        // Check if the sentry gun is currently locked on a target
+        if (isLocked) 
         {
-            // Update our color: yellow if we can see the target,
-            // white if we can't
-            var color = targetIsVisible ? Color.yellow : Color.white;
-
-            GetComponent<Renderer>().material.color = color;
+            
         }
+        // Else, find target to lock onto
+        else 
+        {
+            targetIsVisible = CheckVisibility();
+
+            if (targetIsVisible) 
+            {
+
+            }
+        }
+        
 
     }
 
@@ -166,69 +173,3 @@ public class SentryGunController : MonoBehaviour
 
     }
 }
-
-#if UNITY_EDITOR
-// A custom editor for the EnemyVisibility class. Visualizes and allows
-// for editing the visible range.
-[CustomEditor(typeof(SentryGunController))]
-public class EnemyVisibilityEditor : Editor
-{
-
-    // Called when Unity needs to draw the Scene view.
-    private void OnSceneGUI()
-    {
-        // Get a reference to the EnemyVisibility script we're
-        // looking at
-        var visibility = target as SentryGunController;
-
-        // Start drawing at 10% opacity
-        Handles.color = new Color(1, 1, 1, 0.1f);
-
-        // Drawing an arc sweeps from the point you give it. We want to
-        // draw the arc such that the middle of the arc is in front of
-        // the object, so we'll take the forward direction and rotate
-        // it by half the angle.
-
-        var forwardPointMinusHalfAngle =
-            // rotate around the y-axis by half the angle
-            Quaternion.Euler(0, -visibility.angle / 2, 0)
-                      // rotate the forward direction by this
-                      * visibility.transform.forward;
-
-        // Draw the arc to visualize the visibility arc
-        Vector3 arcStart =
-            forwardPointMinusHalfAngle * visibility.maxDistance;
-
-        Handles.DrawSolidArc(
-            visibility.transform.position, // Center of the arc
-            Vector3.up,                    // Up direction of the arc
-            arcStart,                      // Point where it begins
-            visibility.angle,              // Angle of the arc
-            visibility.maxDistance         // Radius of the arc
-        );
-
-        // Draw a scale handle at the edge of the arc; if the user drags
-        // it, update the arc size.
-
-        // Reset the handle color to full opacity
-        Handles.color = Color.white;
-
-        // Compute the position of the handle, based on the object's
-        // position, the direction it's facing, and the distance
-        Vector3 handlePosition =
-            visibility.transform.position +
-                  visibility.transform.forward * visibility.maxDistance;
-
-        // Draw the handle, and store its result.
-        visibility.maxDistance = Handles.ScaleValueHandle(
-            visibility.maxDistance,         // current value
-            handlePosition,                 // handle position
-            visibility.transform.rotation,  // orientation
-            1,                              // size
-            Handles.ConeHandleCap,          // cap to draw
-            0.25f);                         // snap to multiples of this
-                                            // if the snapping key is
-                                            // held down
-    }
-}
-#endif

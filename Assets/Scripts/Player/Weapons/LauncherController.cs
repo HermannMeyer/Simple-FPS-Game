@@ -4,18 +4,6 @@ using UnityEngine;
 
 public class LauncherController : GunController
 {
-    /*
-    new public string weaponName = "Rocket Launcher";
-    new public float fireRate = 300f; // Fire rate in terms of rounds per minute
-    new public int ammoInMag; // Number of rounds in a magazine
-    new int magazineSize = 1;
-    new public int ammoCount; // Total number of rounds carried by the player
-    new public int maxAmmoCount = 5;
-    new public float reloadTime = 1f;
-    new public Camera playerCamera;
-    new public ParticleSystem muzzleFlash;
-    new public Animator animator; */
-
     public GameObject projectilePrefab;
     public GameObject muzzle;
 
