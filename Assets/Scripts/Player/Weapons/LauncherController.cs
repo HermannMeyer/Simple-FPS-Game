@@ -6,6 +6,7 @@ public class LauncherController : GunController
 {
     public GameObject projectilePrefab;
     public GameObject muzzle;
+    public float initialForce = 0f;
 
     float nextTimeToFire = 0f;
     bool isReloading = false;
@@ -47,8 +48,10 @@ public class LauncherController : GunController
         // Muzzle Flash effect
         muzzleFlash.Play();
 
-        // Instantiates a projectile
-        Instantiate(projectilePrefab, muzzle.transform.position, muzzle.transform.rotation);
+        // Instantiates a projectile and apply initial force if applicable
+        GameObject projectile = Instantiate(projectilePrefab, muzzle.transform.position, muzzle.transform.rotation);
+        Rigidbody rb = projectile.GetComponent<Rigidbody>();
+        rb.AddForce(initialForce * transform.forward);
 
         ammoInMag--;
     }
