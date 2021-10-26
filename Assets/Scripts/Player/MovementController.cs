@@ -19,12 +19,12 @@ public class MovementController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        horizontalMovement();
-        verticalMovement();
+        HorizontalMovement();
+        VerticalMovement();
     }
 
     // Handle movements on the XZ plane
-    void horizontalMovement()
+    void HorizontalMovement()
     {
         float xMovemnent = Input.GetAxis("Horizontal") * moveSpeed * Time.deltaTime;
         float zMovement = Input.GetAxis("Vertical") * moveSpeed * Time.deltaTime;
@@ -34,7 +34,7 @@ public class MovementController : MonoBehaviour
     }
 
     // Handle movements on the Y axis (falling, jumping)
-    void verticalMovement()
+    void VerticalMovement()
     {
         // If the player is touching the ground, resets the fall velocity to -2
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
