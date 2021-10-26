@@ -10,6 +10,7 @@ public class GrenadeDisplay : MonoBehaviour
     void Update()
     {
         GrenadeThrower grenadeThrower = mainCamera.GetComponent<GrenadeThrower>();
-        text.text = "Grenade: " + grenadeThrower.grenadeCount;
+        int grenadeCount = grenadeThrower.GetGrenadeCount();
+        text.text = "Grenade: " + grenadeCount;
     }
 }

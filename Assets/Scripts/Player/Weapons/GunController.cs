@@ -9,24 +9,24 @@ public class GunController : MonoBehaviour
     public float range = 100f;
     public float fireRate = 300f; // Fire rate in terms of rounds per minute
     public float impactForce = 100f;
-    public int ammoInMag; // Number of rounds in a magazine
     public int magazineSize = 30;
-    public int ammoCount; // Total number of rounds carried by the player
     public int maxAmmoCount = 180;
     public float reloadTime = 1f;
     public Camera playerCamera;
     public ParticleSystem muzzleFlash;
     public Animator animator;
 
-    float nextTimeToFire = 0f;
-    bool isReloading = false;
+    protected int ammoCount; // Total number of rounds carried by the player
+    protected int ammoInMag; // Number of rounds in a magazine
+    protected float nextTimeToFire = 0f;
+    protected bool isReloading = false;
 
     void Start()
     {
         Refill();
     }
 
-    void OnEnable()
+    protected void OnEnable()
     {
         isReloading = false;
         animator.SetBool("Reloading", false);
@@ -40,7 +40,7 @@ public class GunController : MonoBehaviour
             return;
         }
 
-        if (Input.GetButton("Fire1") && ammoInMag > 0 && Time.time >= nextTimeToFire)
+        if (Input.GetButton("Fire1") && (ammoInMag > 0) && (Time.time >= nextTimeToFire))
         {
             nextTimeToFire = Time.time + 60f / fireRate;
             Shoot();
@@ -53,7 +53,7 @@ public class GunController : MonoBehaviour
         }
     }
 
-    void Shoot()
+    protected void Shoot()
     {
         // Muzzle Flash effect
         muzzleFlash.Play();
@@ -80,7 +80,7 @@ public class GunController : MonoBehaviour
         ammoInMag--;
     }
 
-    IEnumerator Reload()
+    public IEnumerator Reload()
     {
         isReloading = true;
 
@@ -108,9 +108,19 @@ public class GunController : MonoBehaviour
         isReloading = false;
     }
 
-    void Refill()
+    public void Refill()
     {
         ammoCount = maxAmmoCount;
         ammoInMag = magazineSize;
     }
+
+    public int GetAmmoCountInMag()
+    {
+        return ammoInMag;
+    }
+
+    public int GetTotalAmmoCount()
+    {
+        return ammoCount;
+    } 
 }
