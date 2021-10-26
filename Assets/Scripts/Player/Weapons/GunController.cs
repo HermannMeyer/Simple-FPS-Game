@@ -40,7 +40,7 @@ public class GunController : MonoBehaviour
             return;
         }
 
-        if (Input.GetButton("Fire1") && ammoInMag > 0 && Time.time >= nextTimeToFire)
+        if (Input.GetButton("Fire1") && (ammoInMag > 0) && (Time.time >= nextTimeToFire))
         {
             nextTimeToFire = Time.time + 60f / fireRate;
             Shoot();

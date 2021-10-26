@@ -21,7 +21,7 @@ public class LauncherController : GunController
             return;
         }
 
-        if (Input.GetButton("Fire1") && ammoInMag > 0 && Time.time >= nextTimeToFire)
+        if (Input.GetButton("Fire1") && (ammoInMag > 0) && (Time.time >= nextTimeToFire))
         {
             nextTimeToFire = Time.time + 60f / fireRate;
             Shoot();
@@ -42,7 +42,7 @@ public class LauncherController : GunController
         // Instantiates a projectile and apply initial force if applicable
         GameObject projectile = Instantiate(projectilePrefab, muzzle.transform.position, muzzle.transform.rotation);
         Rigidbody rb = projectile.GetComponent<Rigidbody>();
-        rb.AddForce(initialForce * transform.forward);
+        rb.AddForce(initialForce * muzzle.transform.forward);
 
         ammoInMag--;
     }

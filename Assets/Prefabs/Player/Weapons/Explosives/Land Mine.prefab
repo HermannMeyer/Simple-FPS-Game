@@ -254,3 +254,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf1556e76d607274096235ce9f61dcfb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  blastRadius: 8
+  explosionForce: 250
+  damage: 100

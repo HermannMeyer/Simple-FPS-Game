@@ -62,10 +62,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9b1e51d21e492547a11422c0c26da45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fuzeTime: 3
   blastRadius: 5
-  explosionForce: 200
+  explosionForce: 110
   damage: 50
+  fuzeTime: 3
 --- !u!1 &7439590391428333316
 GameObject:
   m_ObjectHideFlags: 0
@@ -118,6 +118,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -214,6 +215,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
