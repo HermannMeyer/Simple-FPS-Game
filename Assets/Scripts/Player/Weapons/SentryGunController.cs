@@ -7,11 +7,25 @@ public class SentryGunController : MonoBehaviour
 {
 
     // The object we're looking for.
-    public Transform target = null;
+    Transform target = null;
+
     public GameObject rotatingPart;
+    public GameObject muzzle;
 
     // If the object is more than this distance away, we can't see it.
-    public float maxDistance = 10f;
+    public float maxWeaponDistance = 30f;
+
+    // Maximum search distance
+    public float maxSearchDistance = 50f;
+
+    // Rotation speed
+    public float rotationSpeed = 100f;
+
+    // Total ammunition count
+    public int maxAmmo = 250;
+
+    // Current ammo count
+    int ammoCount;
 
     // The angle of our arc of visibility.
     [Range(0f, 360f)]
@@ -21,20 +35,23 @@ public class SentryGunController : MonoBehaviour
     // currently see our target.
     public bool targetIsVisible { get; private set; }
 
-    // The gun's rotation speed
-    public float rotationSpeed;
-
     // Indicates whether the sentry gun is locked on a target or not
     // If so, engage the target until it is neutralized
     bool isLocked = false;
+
+    void Awake()
+    {
+        ammoCount = maxAmmo;
+    }
 
     // Check to see if we can see the target every frame.
     void Update()
     {
         // Check if the sentry gun is currently locked on a target
-        if (isLocked) 
+        if (!isLocked) 
         {
-            
+            //isLocked = SearchForTargets();
+            Rotate(Vector3.up);
         }
         // Else, find target to lock onto
         else 
@@ -48,6 +65,17 @@ public class SentryGunController : MonoBehaviour
         }
         
 
+    }
+
+    void Rotate(Vector3 rotation)
+    {
+        rotatingPart.transform.Rotate(rotation * rotationSpeed * Time.deltaTime);
+    }
+
+    // Returns true if a target is found and locked on, otherwise returns false.
+    bool SearchForTargets()
+    {
+        return false;
     }
 
     // Returns true if this object can see the specified position.
@@ -74,11 +102,11 @@ public class SentryGunController : MonoBehaviour
         var distanceToTarget = directionToTarget.magnitude;
 
         // Take into account our maximum distance
-        var rayDistance = Mathf.Min(maxDistance, distanceToTarget);
+        var rayDistance = Mathf.Min(maxWeaponDistance, distanceToTarget);
 
         // Create a new ray that goes from our current location, in the
         // specified direction
-        var ray = new Ray(transform.position, directionToTarget);
+        var ray = new Ray(muzzle.transform.position, directionToTarget);
 
         // Stores information about anything we hit
         RaycastHit hit;
@@ -130,7 +158,7 @@ public class SentryGunController : MonoBehaviour
 
         // Our ray should go as far as the target is or the maximum
         // distance, whichever is shorter
-        var rayDistance = Mathf.Min(maxDistance, distanceToTarget);
+        var rayDistance = Mathf.Min(maxWeaponDistance, distanceToTarget);
 
         // Create a ray that fires out from our position to the target
         var ray = new Ray(transform.position, directionToTarget);

@@ -20,7 +20,9 @@ public class WeaponDisplay : MonoBehaviour
             if (weapon.gameObject.activeInHierarchy)
             {
                 GunController gunController = weapon.GetComponent<GunController>();
-                weaponText.text = gunController.weaponName + ": " + gunController.ammoInMag + "/" + gunController.ammoCount;
+                int ammoInMag = gunController.GetAmmoCountInMag();
+                int totalAmmo = gunController.GetTotalAmmoCount();
+                weaponText.text = gunController.weaponName + ": " + ammoInMag + "/" + totalAmmo;
             }
         }
     }

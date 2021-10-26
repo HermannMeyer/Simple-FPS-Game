@@ -11,7 +11,7 @@ public class ExplosiveController : MonoBehaviour
     // Damage that will be inflicted upon objects
     public float damage = 80f;
 
-    public void Explode()
+    protected void Explode()
     {
         // TODO - Add explosion effect
 

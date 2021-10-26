@@ -7,7 +7,7 @@ public class GrenadeThrower : MonoBehaviour
     public float throwForce = 50f;
     public int maxGrenadeCount = 4;
     public GameObject grenadePrefab;
-    public int grenadeCount;
+    int grenadeCount;
 
     void Start()
     {
@@ -16,10 +16,10 @@ public class GrenadeThrower : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.G) && maxGrenadeCount > 0)
+        if (Input.GetKeyDown(KeyCode.G) && (grenadeCount > 0))
         {
             ThrowGrenade();
-            grenadeCount -= 1;
+            grenadeCount--;
         }
     }
 
@@ -32,8 +32,13 @@ public class GrenadeThrower : MonoBehaviour
         rb.AddForce(throwForce * transform.forward);
     }
 
-    void Restock()
+    public void Restock()
     {
         grenadeCount = maxGrenadeCount;
+    }
+
+    public int GetGrenadeCount()
+    {
+        return grenadeCount;
     }
 }

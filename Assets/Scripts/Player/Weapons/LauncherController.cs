@@ -8,18 +8,9 @@ public class LauncherController : GunController
     public GameObject muzzle;
     public float initialForce = 0f;
 
-    float nextTimeToFire = 0f;
-    bool isReloading = false;
-
     void Start()
     {
         Refill();
-    }
-
-    void OnEnable()
-    {
-        isReloading = false;
-        animator.SetBool("Reloading", false);
     }
 
     // Update is called once per frame
