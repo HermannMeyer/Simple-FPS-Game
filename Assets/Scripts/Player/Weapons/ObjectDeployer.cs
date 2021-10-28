@@ -35,7 +35,7 @@ public class ObjectDeployer : MonoBehaviour
             if (hit.transform.CompareTag("Ground"))
             {
                 Instantiate(objectPrefab, hit.point, hit.transform.rotation);
-                print("Deployment successful, # of remaining object: " + objectCount);
+                print("Deployment successful, # of remaining object: " + (objectCount - 1));
             }
             else
             {

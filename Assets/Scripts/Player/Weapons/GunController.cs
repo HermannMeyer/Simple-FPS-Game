@@ -46,7 +46,7 @@ public class GunController : MonoBehaviour
             Shoot();
         }
 
-        if (Input.GetKeyDown(KeyCode.R) && ammoInMag < magazineSize)
+        if (Input.GetKeyDown(KeyCode.R) && (ammoInMag < magazineSize))
         {
             StartCoroutine(Reload());
             return;

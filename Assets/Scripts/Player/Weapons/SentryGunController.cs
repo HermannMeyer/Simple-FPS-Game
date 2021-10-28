@@ -7,19 +7,25 @@ public class SentryGunController : MonoBehaviour
 {
 
     // The object we're looking for.
-    Transform target = null;
+    Transform lockedTarget = null;
 
     public GameObject rotatingPart;
     public GameObject muzzle;
 
     // If the object is more than this distance away, we can't see it.
-    public float maxWeaponDistance = 30f;
-
-    // Maximum search distance
-    public float maxSearchDistance = 50f;
+    public float range = 50f;
 
     // Rotation speed
     public float rotationSpeed = 100f;
+
+    // Damage
+    public float damage = 0f;
+
+    // Rate of fire (in RPM)
+    public float fireRate = 0f;
+
+    // Impact force
+    public float impactForce = 0f;
 
     // Total ammunition count
     public int maxAmmo = 250;
@@ -29,7 +35,7 @@ public class SentryGunController : MonoBehaviour
 
     // The angle of our arc of visibility.
     [Range(0f, 360f)]
-    public float angle = 45f;
+    public float angle = 360f;
 
     // A property that other classes can access to determine if we can
     // currently see our target.
@@ -39,6 +45,9 @@ public class SentryGunController : MonoBehaviour
     // If so, engage the target until it is neutralized
     bool isLocked = false;
 
+    //
+    float nextTimeToFire = 0f;
+
     void Awake()
     {
         ammoCount = maxAmmo;
@@ -47,34 +56,73 @@ public class SentryGunController : MonoBehaviour
     // Check to see if we can see the target every frame.
     void Update()
     {
-        // Check if the sentry gun is currently locked on a target
+        // If there is no locked target, find a target to lock onto
         if (!isLocked) 
         {
-            //isLocked = SearchForTargets();
-            Rotate(Vector3.up);
+            isLocked = SearchForTargets();
         }
-        // Else, find target to lock onto
+        // Else, attempt to track and engage currently locked on target
         else 
         {
-            targetIsVisible = CheckVisibility();
-
-            if (targetIsVisible) 
+            if (lockedTarget != null)
             {
-
+                EngageTarget();
+            }
+            else
+            {
+                isLocked = false;
             }
         }
-        
-
     }
 
-    void Rotate(Vector3 rotation)
+    
+
+    void EngageTarget()
     {
-        rotatingPart.transform.Rotate(rotation * rotationSpeed * Time.deltaTime);
+        // Track target
+        var directionToTarget = lockedTarget.position - transform.position;
+
+        var angleToTarget = Vector3.Angle(transform.forward, directionToTarget);
+
+        Quaternion rotation = Quaternion.Euler(0f, angleToTarget, 0f);
+
+        rotatingPart.transform.rotation = Quaternion.Slerp(rotatingPart.transform.rotation, rotation, Time.deltaTime * rotationSpeed);
+    }
+
+    void Shoot()
+    {
+        RaycastHit hit;
+
+        if (Physics.Raycast(muzzle.transform.position, muzzle.transform.forward, out hit, range))
+        {
+            Target target = hit.transform.GetComponent<Target>();
+
+            if (hit.rigidbody != null)
+            {
+                hit.rigidbody.AddForce(-hit.normal * impactForce);
+            }
+
+            if (target != null)
+            {
+                target.TakeDamage(damage);
+            }
+        }
     }
 
     // Returns true if a target is found and locked on, otherwise returns false.
     bool SearchForTargets()
     {
+        GameObject[] targets = GameObject.FindGameObjectsWithTag("Enemy");
+        
+        foreach (GameObject target in targets)
+        {
+            if (CheckVisibility(target.transform))
+            {
+                lockedTarget = target.transform;
+                print(lockedTarget.name);
+                return true;
+            }
+        }
         return false;
     }
 
@@ -102,7 +150,7 @@ public class SentryGunController : MonoBehaviour
         var distanceToTarget = directionToTarget.magnitude;
 
         // Take into account our maximum distance
-        var rayDistance = Mathf.Min(maxWeaponDistance, distanceToTarget);
+        var rayDistance = Mathf.Min(range, distanceToTarget);
 
         // Create a new ray that goes from our current location, in the
         // specified direction
@@ -115,7 +163,7 @@ public class SentryGunController : MonoBehaviour
         if (Physics.Raycast(ray, out hit, rayDistance))
         {
             // We hit something.
-            if (hit.collider.transform == target)
+            if (hit.collider.transform == lockedTarget)
             {
                 // It was the target itself. We can see the target point.
                 return true;
@@ -135,7 +183,7 @@ public class SentryGunController : MonoBehaviour
     // Returns true if a straight line can be drawn between this object
     // and the target. The target must be within range, and within the
     // visible arc.
-    public bool CheckVisibility()
+    public bool CheckVisibility(Transform target)
     {
         // Compute the direction to the target
         var directionToTarget = target.position - transform.position;
@@ -158,7 +206,7 @@ public class SentryGunController : MonoBehaviour
 
         // Our ray should go as far as the target is or the maximum
         // distance, whichever is shorter
-        var rayDistance = Mathf.Min(maxWeaponDistance, distanceToTarget);
+        var rayDistance = Mathf.Min(range, distanceToTarget);
 
         // Create a ray that fires out from our position to the target
         var ray = new Ray(transform.position, directionToTarget);
