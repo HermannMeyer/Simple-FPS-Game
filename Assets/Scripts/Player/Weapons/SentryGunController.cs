@@ -56,6 +56,11 @@ public class SentryGunController : MonoBehaviour
     // Check to see if we can see the target every frame.
     void Update()
     {
+        // If ammo runs out, sentry gun auto self-destructs
+        if (ammoCount <= 0)
+        {
+            Destroy(gameObject);
+        }
         // If there is no locked target, find a target to lock onto
         if (!isLocked) 
         {
@@ -71,22 +76,36 @@ public class SentryGunController : MonoBehaviour
             else
             {
                 isLocked = false;
+                nextTimeToFire = 0f;
             }
         }
     }
 
-    
-
     void EngageTarget()
     {
         // Track target
-        var directionToTarget = lockedTarget.position - transform.position;
+        Vector3 directionToTarget = Vector3.ProjectOnPlane(lockedTarget.position - transform.position, Vector3.up);
+        Vector3 normal = Vector3.Cross(directionToTarget, transform.forward);
+        float angleToTarget;
 
-        var angleToTarget = Vector3.Angle(transform.forward, directionToTarget);
+        if (Vector3.Dot(normal, Vector3.up) < 0f)
+        {
+            angleToTarget = Vector3.Angle(transform.forward, directionToTarget);
+        }
+        else
+        {
+            angleToTarget = -Vector3.Angle(transform.forward, directionToTarget);
+        }
 
         Quaternion rotation = Quaternion.Euler(0f, angleToTarget, 0f);
-
         rotatingPart.transform.rotation = Quaternion.Slerp(rotatingPart.transform.rotation, rotation, Time.deltaTime * rotationSpeed);
+
+        // Engage target
+        if ((ammoCount > 0) && (Time.time >= nextTimeToFire))
+        {
+            nextTimeToFire = Time.time + 60f / fireRate;
+            Shoot();
+        }
     }
 
     void Shoot()
@@ -107,6 +126,7 @@ public class SentryGunController : MonoBehaviour
                 target.TakeDamage(damage);
             }
         }
+        ammoCount--;
     }
 
     // Returns true if a target is found and locked on, otherwise returns false.
