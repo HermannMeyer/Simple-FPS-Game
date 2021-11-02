@@ -71,7 +71,7 @@ public class SentryGunController : MonoBehaviour
         {
             if (lockedTarget != null)
             {
-                EngageTarget();
+                isLocked = EngageTarget();
             }
             else
             {
@@ -81,21 +81,17 @@ public class SentryGunController : MonoBehaviour
         }
     }
 
-    void EngageTarget()
+    bool EngageTarget()
     {
+        // Check if the target is visible
+        if (!CheckVisibility(lockedTarget)) {
+            return false;
+        }
+
         // Track target
         Vector3 directionToTarget = Vector3.ProjectOnPlane(lockedTarget.position - transform.position, Vector3.up);
-        Vector3 normal = Vector3.Cross(directionToTarget, transform.forward);
-        float angleToTarget;
 
-        if (Vector3.Dot(normal, Vector3.up) < 0f)
-        {
-            angleToTarget = Vector3.Angle(transform.forward, directionToTarget);
-        }
-        else
-        {
-            angleToTarget = -Vector3.Angle(transform.forward, directionToTarget);
-        }
+        float angleToTarget = Vector3.SignedAngle(transform.forward, directionToTarget, Vector3.up);
 
         Quaternion rotation = Quaternion.Euler(0f, angleToTarget, 0f);
         rotatingPart.transform.rotation = Quaternion.Slerp(rotatingPart.transform.rotation, rotation, Time.deltaTime * rotationSpeed);
@@ -106,6 +102,8 @@ public class SentryGunController : MonoBehaviour
             nextTimeToFire = Time.time + 60f / fireRate;
             Shoot();
         }
+
+        return true;
     }
 
     void Shoot()
