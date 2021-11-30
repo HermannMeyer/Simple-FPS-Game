@@ -26,6 +26,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2398289291274447773}
   - {fileID: 2398289291643532525}
@@ -66,6 +67,7 @@ Transform:
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: -0.3, y: 1.2, z: -0.3}
   m_LocalScale: {x: 0.4, y: 0.1, z: 0.4}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 891905633011202733}
   m_RootOrder: 3
@@ -163,6 +165,7 @@ Transform:
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 1.2, z: 0.5}
   m_LocalScale: {x: 0.1, y: 0.75000006, z: 0.10000001}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 891905633011202733}
   m_RootOrder: 2
@@ -260,6 +263,7 @@ Transform:
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0.3, y: 1.2, z: -0.3}
   m_LocalScale: {x: 0.4, y: 0.1, z: 0.4}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 891905633011202733}
   m_RootOrder: 4
@@ -357,6 +361,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0.6, z: 0}
   m_LocalScale: {x: 0.2, y: 0.5, z: 0.2}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 891905633011202733}
   m_RootOrder: 0
@@ -435,6 +440,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2398289291399707933}
   - component: {fileID: 3279018254765483183}
+  - component: {fileID: 7007779124345363824}
   m_Layer: 0
   m_Name: Sentry Gun
   m_TagString: Untagged
@@ -450,8 +456,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2398289291399707934}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5, y: 0, z: 5}
+  m_LocalPosition: {x: 5, y: 12.92, z: 5}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2398289291439777470}
   - {fileID: 891905633011202733}
@@ -472,11 +479,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotatingPart: {fileID: 891905633011202734}
   muzzle: {fileID: 4908317080047914583}
-  maxWeaponDistance: 30
-  maxSearchDistance: 50
-  rotationSpeed: 100
+  range: 50
+  rotationSpeed: 3
+  damage: 7.5
+  fireRate: 120
+  impactForce: 100
   maxAmmo: 250
-  angle: 45
+  angle: 360
+--- !u!65 &7007779124345363824
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2398289291399707934}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 50, y: 2, z: 50}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2398289291439777471
 GameObject:
   m_ObjectHideFlags: 0
@@ -506,6 +528,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.8, y: 0.2, z: 0.8}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2398289291399707933}
   m_RootOrder: 0
@@ -602,6 +625,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 1.2, z: -0.1}
   m_LocalScale: {x: 0.3, y: 0.25, z: 0.75}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 891905633011202733}
   m_RootOrder: 1
@@ -698,6 +722,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 1.4000001, z: -0.25}
   m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 891905633011202733}
   m_RootOrder: 5
@@ -792,6 +817,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1.25, z: 1.25}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 891905633011202733}
   m_RootOrder: 6

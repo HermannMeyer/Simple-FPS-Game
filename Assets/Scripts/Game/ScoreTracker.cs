@@ -4,15 +4,17 @@ using UnityEngine;
 
 public class ScoreTracker : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public int score;
+    public int money;
+
+    void Awake()
     {
-        
+        score = 0;
+        money = score;
     }
 
-    // Update is called once per frame
-    void Update()
+    int GetScore()
     {
-        
+        return score;
     }
 }
