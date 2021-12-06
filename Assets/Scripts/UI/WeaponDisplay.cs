@@ -4,8 +4,8 @@ using UnityEngine.UI;
 public class WeaponDisplay : MonoBehaviour
 {
     // public GameObject weaponHolder;
-    public Text weaponText;
-    public Transform weaponHolder;
+    [SerializeField] Text weaponText;
+    [SerializeField] Transform weaponHolder;
 
     // Update is called once per frame
     void Update()
@@ -20,9 +20,10 @@ public class WeaponDisplay : MonoBehaviour
             if (weapon.gameObject.activeInHierarchy)
             {
                 GunController gunController = weapon.GetComponent<GunController>();
-                int ammoInMag = gunController.GetAmmoCountInMag();
-                int totalAmmo = gunController.GetTotalAmmoCount();
-                weaponText.text = gunController.weaponName + ": " + ammoInMag + "/" + totalAmmo;
+                string ammoInMag = gunController.GetAmmoCountInMag().ToString();
+                string totalAmmo = gunController.GetTotalAmmoCount().ToString();
+                string weaponName = gunController.GetWeaponName();
+                weaponText.text = weaponName + ": " + ammoInMag + "/" + totalAmmo;
             }
         }
     }

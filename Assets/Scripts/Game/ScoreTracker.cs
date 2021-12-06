@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class ScoreTracker : MonoBehaviour
 {
-    public int score;
-    public int money;
+    [SerializeField] int score;
+    [SerializeField] int money;
 
     void Awake()
     {
@@ -13,8 +13,25 @@ public class ScoreTracker : MonoBehaviour
         money = score;
     }
 
-    int GetScore()
+    public int GetScore()
     {
         return score;
+    }
+
+    public int GetMoney()
+    {
+        return money;
+    }
+
+    public void AddToScore(int addend)
+    {
+        score += addend;
+        money += addend;
+        print("Current score: " + score);
+    }
+
+    public void SubtractMoney(int subtrahend)
+    {
+        money -= subtrahend;
     }
 }

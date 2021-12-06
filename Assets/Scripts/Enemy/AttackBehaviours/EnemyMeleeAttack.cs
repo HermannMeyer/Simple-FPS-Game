@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class EnemyMeleeAttack : MonoBehaviour
 {
-    public float cooldown = 0.5f; // Rate of attack (per second)
-    public float damage = 10f;
+    [SerializeField] float cooldown = 0.5f; // Rate of attack (per second)
+    [SerializeField] float damage = 10f;
 
     GameObject player;
     PlayerHealth playerHealth;

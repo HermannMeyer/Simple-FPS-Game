@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class LauncherController : GunController
 {
-    public GameObject projectilePrefab;
-    public GameObject muzzle;
-    public float initialForce = 0f;
+    [SerializeField] GameObject projectilePrefab;
+    [SerializeField] GameObject muzzle;
+    [SerializeField] float initialForce = 0f;
 
     void Start()
     {

@@ -5,11 +5,11 @@ using UnityEngine;
 public class ExplosiveController : MonoBehaviour
 {
     // The device's blast radius. Anything caught in here will be affected.
-    public float blastRadius = 7.5f;
+    [SerializeField] protected float blastRadius = 7.5f;
     // The force that will be exerted upon objects with Rigidbody
-    public float explosionForce = 150f;
+    [SerializeField] protected float explosionForce = 150f;
     // Damage that will be inflicted upon objects
-    public float damage = 80f;
+    [SerializeField] protected float damage = 80f;
 
     protected void Explode()
     {

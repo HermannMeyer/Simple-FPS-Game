@@ -4,16 +4,18 @@ using UnityEngine;
 
 public class Target : MonoBehaviour
 {
-    public float health = 30f;
-    public GameDirector gameDirector;
+    [SerializeField] int targetScore = 0;
+    [SerializeField] float health = 30f;
+    ScoreTracker scoreTracker;
+    GameDirector gameDirector;
 
     private void Awake()
     {
         if (gameDirector == null)
         {
             gameDirector = GameObject.FindObjectOfType<GameDirector>();
+            scoreTracker = GameObject.FindObjectOfType<ScoreTracker>();
         }
-        //gameDirector.enemiesRemaining++;
     }
 
     public void TakeDamage(float dmg)
@@ -26,14 +28,15 @@ public class Target : MonoBehaviour
         }
     }
 
+    public float GetHealth()
+    {
+        return health;
+    }
+
     void Die()
     {
-        /*
-        if (gameDirector != null)
-        {
-            gameDirector.enemiesRemaining--;
-        } */
-        
+        // Add the target's score value to the total score
+        scoreTracker.AddToScore(targetScore);
         Destroy(gameObject, .1f);
     }
 }

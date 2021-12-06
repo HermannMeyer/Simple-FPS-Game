@@ -9,26 +9,26 @@ public class SentryGunController : MonoBehaviour
     // The object we're looking for.
     Transform lockedTarget = null;
 
-    public GameObject rotatingPart;
-    public GameObject muzzle;
+    [SerializeField] GameObject rotatingPart;
+    [SerializeField] GameObject muzzle;
 
     // If the object is more than this distance away, we can't see it.
-    public float range = 50f;
+    [SerializeField] float range = 50f;
 
     // Rotation speed
-    public float rotationSpeed = 100f;
+    [SerializeField] float rotationSpeed = 100f;
 
     // Damage
-    public float damage = 0f;
+    [SerializeField] float damage = 0f;
 
     // Rate of fire (in RPM)
-    public float fireRate = 0f;
+    [SerializeField] float fireRate = 0f;
 
     // Impact force
-    public float impactForce = 0f;
+    [SerializeField] float impactForce = 0f;
 
     // Total ammunition count
-    public int maxAmmo = 250;
+    [SerializeField] int maxAmmo = 250;
 
     // Current ammo count
     int ammoCount;
@@ -137,7 +137,6 @@ public class SentryGunController : MonoBehaviour
             if (CheckVisibility(target.transform))
             {
                 lockedTarget = target.transform;
-                print(lockedTarget.name);
                 return true;
             }
         }

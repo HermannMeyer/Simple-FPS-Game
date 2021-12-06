@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class WeaponSwitching : MonoBehaviour
 {
-    public int currentWeapon = 0;
+    [SerializeField] int currentWeapon = 0;
 
     // Start is called before the first frame update
     void Start()

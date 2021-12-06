@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class MovementController : MonoBehaviour
 {
-    public CharacterController controller;
-    public float moveSpeed = 5f;
-    public float gravity = -10f;
-    public float jumpHeight = 3f;
+    [SerializeField] CharacterController controller;
+    [SerializeField] float moveSpeed = 5f;
+    [SerializeField] float gravity = -10f;
+    [SerializeField] float jumpHeight = 3f;
 
-    public Transform groundCheck;
-    public float groundDistance = 0.3f;
-    public LayerMask groundMask;
+    [SerializeField] Transform groundCheck;
+    [SerializeField] float groundDistance = 0.3f;
+    [SerializeField] LayerMask groundMask;
 
     private Vector3 velocity;
     private bool isGrounded;

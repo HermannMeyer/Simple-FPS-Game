@@ -3,11 +3,9 @@ using UnityEngine.AI;
 
 public class EnemyController : MonoBehaviour
 {
-    
-    public NavMeshAgent agent;
 
+    [SerializeField] NavMeshAgent agent;
     GameObject player;
-
     Vector3 curPosition;
 
     void Start()

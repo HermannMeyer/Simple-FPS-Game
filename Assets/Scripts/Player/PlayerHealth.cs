@@ -4,9 +4,14 @@ using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
 {
-    public float health = 100f;
-    public float maxHealth = 100f;
+    [SerializeField] float maxHealth = 100f;
+    float health = 100f;
     public bool hasDied { get; private set; } = false;
+
+    public float GetHealth()
+    {
+        return health;
+    }
 
     public void TakeDamage(float dmg)
     {
