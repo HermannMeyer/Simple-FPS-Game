@@ -5,10 +5,10 @@ using UnityEngine;
 public class EnemySuicideAttack : MonoBehaviour
 {
     // Start is called before the first frame update
-    public float blastRadius = 6f;
-    public float damage = 75f;
-    public float explosionForce = 100f;
-    public float timeToExplode = 1.5f;
+    [SerializeField] float blastRadius = 6f;
+    [SerializeField] float damage = 75f;
+    [SerializeField] float explosionForce = 100f;
+    [SerializeField] float timeToExplode = 1.5f;
 
     float countdown;
     bool isInRange = false;

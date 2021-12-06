@@ -4,15 +4,34 @@ using UnityEngine;
 
 public class ScoreTracker : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] int score;
+    [SerializeField] int money;
+
+    void Awake()
     {
-        
+        score = 0;
+        money = score;
     }
 
-    // Update is called once per frame
-    void Update()
+    public int GetScore()
     {
-        
+        return score;
+    }
+
+    public int GetMoney()
+    {
+        return money;
+    }
+
+    public void AddToScore(int addend)
+    {
+        score += addend;
+        money += addend;
+        print("Current score: " + score);
+    }
+
+    public void SubtractMoney(int subtrahend)
+    {
+        money -= subtrahend;
     }
 }

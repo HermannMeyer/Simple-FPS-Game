@@ -3,8 +3,8 @@ using UnityEngine.UI;
 
 public class HealthDisplay : MonoBehaviour
 {
-    public Text healthText;
-    public Transform player;
+    [SerializeField] Text healthText;
+    [SerializeField] Transform player;
 
     // Start is called before the first frame update
 
@@ -12,6 +12,6 @@ public class HealthDisplay : MonoBehaviour
     void Update()
     {
         PlayerHealth playerHealth = player.GetComponent<PlayerHealth>();
-        healthText.text = "Health: " + playerHealth.health.ToString();
+        healthText.text = "Health: " + playerHealth.GetHealth().ToString();
     }
 }

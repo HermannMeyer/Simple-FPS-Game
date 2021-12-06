@@ -3,8 +3,8 @@ using UnityEngine.UI;
 
 public class GrenadeDisplay : MonoBehaviour
 {
-    public Camera mainCamera;
-    public Text text;
+    [SerializeField] Camera mainCamera;
+    [SerializeField] Text text;
 
     // Update is called once per frame
     void Update()

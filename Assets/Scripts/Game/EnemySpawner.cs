@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
+    /*
+    This is a placeholder spawner, and will be revamped soon. 
+    */
     public GameObject gruntPrefab;
     public GameObject brutePrefab;
     public GameObject exploderPrefab;

@@ -4,17 +4,17 @@ using UnityEngine;
 
 public class GunController : MonoBehaviour
 {
-    public string weaponName = "Assault Rifle";
-    public float damage = 5f;
-    public float range = 100f;
-    public float fireRate = 300f; // Fire rate in terms of rounds per minute
-    public float impactForce = 100f;
-    public int magazineSize = 30;
-    public int maxAmmoCount = 180;
-    public float reloadTime = 1f;
-    public Camera playerCamera;
-    public ParticleSystem muzzleFlash;
-    public Animator animator;
+    [SerializeField] protected string weaponName = "Assault Rifle";
+    [SerializeField] protected float damage = 5f;
+    [SerializeField] protected float range = 100f;
+    [SerializeField] protected float fireRate = 300f; // Fire rate in terms of rounds per minute
+    [SerializeField] protected float impactForce = 100f;
+    [SerializeField] protected int magazineSize = 30;
+    [SerializeField] protected int maxAmmoCount = 180;
+    [SerializeField] protected float reloadTime = 1f;
+    [SerializeField] protected Camera playerCamera;
+    [SerializeField] protected ParticleSystem muzzleFlash;
+    [SerializeField] protected Animator animator;
 
     protected int ammoCount; // Total number of rounds carried by the player
     protected int ammoInMag; // Number of rounds in a magazine
@@ -46,7 +46,7 @@ public class GunController : MonoBehaviour
             Shoot();
         }
 
-        if (Input.GetKeyDown(KeyCode.R) && ammoInMag < magazineSize)
+        if (Input.GetKeyDown(KeyCode.R) && (ammoInMag < magazineSize))
         {
             StartCoroutine(Reload());
             return;
@@ -122,5 +122,10 @@ public class GunController : MonoBehaviour
     public int GetTotalAmmoCount()
     {
         return ammoCount;
-    } 
+    }
+
+    public string GetWeaponName()
+    {
+        return weaponName;
+    }
 }

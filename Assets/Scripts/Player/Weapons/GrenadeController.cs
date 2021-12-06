@@ -5,7 +5,7 @@ using UnityEngine;
 public class GrenadeController : ExplosiveController
 {
     // Time before the grenade explodes
-    public float fuzeTime = 3f;
+    [SerializeField] float fuzeTime = 3f;
 
     // Current time of the fuze
     float countdown;

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class RocketController : ExplosiveController
 {
-    public float moveForce = 100f;
+    [SerializeField] float moveForce = 100f;
     Camera mainCamera;
 
     Rigidbody rb;

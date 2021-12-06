@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class EnemySpawnAttack : MonoBehaviour
 {
-    public float cooldown = 1f; // Rate of attack (per second)
-    public float damage = 10f;
-    public GameObject spawnlingPrefab;
-    public Target target;
-    public int numberOfSpawnlings = 4;
+    [SerializeField] float cooldown = 1f; // Rate of attack (per second)
+    [SerializeField] float damage = 10f;
+    [SerializeField] GameObject spawnlingPrefab;
+    [SerializeField] Target target;
+    [SerializeField] int numberOfSpawnlings = 4;
 
     GameObject player;
     PlayerHealth playerHealth;
@@ -50,7 +50,7 @@ public class EnemySpawnAttack : MonoBehaviour
             Attack();
         }
 
-        if (target.health <= 0 && !isDead)
+        if (target.GetHealth() <= 0 && !isDead)
         {
             Spawn();
             isDead = true;

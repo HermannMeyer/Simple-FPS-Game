@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class ObjectDeployer : MonoBehaviour
 {
-    public GameObject objectPrefab;
-    public int maxObjectCount;
-    public float deployRange = 4f;
+    [SerializeField] GameObject objectPrefab;
+    [SerializeField] int maxObjectCount;
+    [SerializeField] float deployRange = 4f;
 
     int objectCount;
 
@@ -35,7 +35,7 @@ public class ObjectDeployer : MonoBehaviour
             if (hit.transform.CompareTag("Ground"))
             {
                 Instantiate(objectPrefab, hit.point, hit.transform.rotation);
-                print("Deployment successful, # of remaining object: " + objectCount);
+                print("Deployment successful, # of remaining object: " + (objectCount - 1));
             }
             else
             {
@@ -48,7 +48,7 @@ public class ObjectDeployer : MonoBehaviour
         }
     }
 
-    void Restock()
+    public void Restock()
     {
         objectCount = maxObjectCount;
     }
