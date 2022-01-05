@@ -1,7 +1,7 @@
 # IS Project
 
 ## Overview
-This is a prototype wave-based survival first-person shooter (FPS) video game, which is the focus of the creator's Senior Independent Study for the College of Wooster's class of 2022. The main purpose of this project is to explore the processes behind designing and creating a video game. As the project progresses, there are many other features that could be explored and potentially added into the game, as detailed below. This project is made with Unity version 2021.1.26f1 and written in C#.
+This is a prototype wave-based survival first-person shooter (FPS) video game, which is the focus of the creator's Senior Independent Study for the College of Wooster's class of 2022. The main purpose of this project is to explore the processes behind designing and creating a video game. As the project progresses, there are many other features that could be explored and potentially added into the game, as detailed below. This project is made with Unity version 2021.2.0f1 and written in C#.
 
 ## Features
 Currently, the game has the following features:
