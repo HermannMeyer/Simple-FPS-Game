@@ -1,18 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class ShopController : MonoBehaviour
 {
-    [SerializeField] protected GameObject shopPanel;
+    [SerializeField] protected GameObject shopTextObj;
     [SerializeField] protected GameObject weaponHolder;
     [SerializeField] protected GameObject scoreTrackerObj;
+    [SerializeField] protected int price = 0;
 
     protected ScoreTracker scoreTracker;
+    protected TextMeshProUGUI shopText;
 
     protected void Awake()
     {
         scoreTracker = scoreTrackerObj.GetComponent<ScoreTracker>();
+        shopText = shopTextObj.GetComponent<TextMeshProUGUI>();
     }
 
     protected void OnTriggerEnter(Collider other)
@@ -33,15 +37,13 @@ public class ShopController : MonoBehaviour
 
     protected void OpenShop()
     {
-        Cursor.lockState = CursorLockMode.None;
         weaponHolder.SetActive(false);
-        shopPanel.SetActive(true);
+        shopTextObj.SetActive(true);
     }
 
     protected void CloseShop()
     {
-        shopPanel.SetActive(false);
+        shopTextObj.SetActive(false);
         weaponHolder.SetActive(true);
-        Cursor.lockState = CursorLockMode.Locked;
     }
 }
