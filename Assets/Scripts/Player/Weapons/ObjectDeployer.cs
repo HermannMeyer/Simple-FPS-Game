@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class ObjectDeployer : MonoBehaviour
 {
-    [SerializeField] GameObject objectPrefab;
-    [SerializeField] int maxObjectCount;
+    public GameObject objectPrefab;
+    public int maxObjectCount;
     [SerializeField] float deployRange = 4f;
 
     int objectCount;
