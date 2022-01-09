@@ -1076,7 +1076,7 @@ MonoBehaviour:
   weaponHolder: {fileID: 152827394}
   scoreTrackerObj: {fileID: 1014082152}
   price: 500
-  landMinePrefab: {fileID: 0}
+  landMinePrefab: {fileID: 7962636625753949328, guid: 7c73fa81646bbfb41aab86ea9bdcab48, type: 3}
   sentryGunPrefab: {fileID: 2398289291399707934, guid: 2a1d9ef88cca05345acf026952f63f15, type: 3}
 --- !u!135 &261973801
 SphereCollider:
