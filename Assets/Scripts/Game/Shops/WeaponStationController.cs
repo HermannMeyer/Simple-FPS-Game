@@ -4,19 +4,33 @@ using UnityEngine;
 
 public class WeaponStationController : ShopController
 {
+    [SerializeField] GameObject weaponPrefab;
+
+    string weaponName;
+    WeaponSwitching weaponSwitching;
+
+    private void Start()
+    {
+        GunController gunController = weaponPrefab.GetComponent<GunController>();
+        weaponName = gunController.GetWeaponName();
+        weaponSwitching = weaponHolder.GetComponent<WeaponSwitching>();
+    }
+
     private void OnTriggerStay(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            shopText.text = "Restore 100 units of HP for " + price.ToString() + "?";
+            shopText.text = "Purchase " + weaponName + " for " + price.ToString() + "?";
 
             if (Input.GetKeyDown(KeyCode.F))
             {
                 // Check if player has sufficient funds
                 if (scoreTracker.GetBalance() >= price)
                 {
-                    
-                    scoreTracker.SubtractFromBalance(price);
+                    if (weaponSwitching.AddWeapon(weaponPrefab))
+                    {
+                        scoreTracker.SubtractFromBalance(price);
+                    }
                 }
                 else
                 {

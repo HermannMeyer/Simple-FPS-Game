@@ -8,12 +8,6 @@ public class LauncherController : GunController
     [SerializeField] GameObject muzzle;
     [SerializeField] float initialForce = 0f;
 
-    void Start()
-    {
-        Refill();
-    }
-
-    // Update is called once per frame
     void Update()
     {
         if (isReloading)
@@ -27,7 +21,7 @@ public class LauncherController : GunController
             Shoot();
         }
 
-        if (Input.GetKeyDown(KeyCode.R) && ammoInMag < magazineSize)
+        if (Input.GetKeyDown(KeyCode.R) && (ammoInMag < magazineSize))
         {
             StartCoroutine(Reload());
             return;

@@ -88,4 +88,25 @@ public class WeaponSwitching : MonoBehaviour
             i++;
         }
     }
+
+    public bool AddWeapon(GameObject weaponPrefab)
+    {
+        string weaponName = weaponPrefab.GetComponent<GunController>().GetWeaponName();
+        foreach (Transform tf in transform)
+        {
+            string curWeaponName = tf.GetComponent<GunController>().GetWeaponName();
+            if (curWeaponName == weaponName)
+            {
+                return false;
+            }
+        }
+        GameObject weapon = Instantiate(weaponPrefab, transform);
+        weapon.SetActive(false);
+        return true;
+    }
+
+    public void RemoveWeapon()
+    {
+
+    }
 }

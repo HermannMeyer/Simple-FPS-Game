@@ -12,16 +12,22 @@ public class GunController : MonoBehaviour
     [SerializeField] protected int magazineSize = 30;
     [SerializeField] protected int maxAmmoCount = 180;
     [SerializeField] protected float reloadTime = 1f;
-    [SerializeField] protected Camera playerCamera;
     [SerializeField] protected ParticleSystem muzzleFlash;
-    [SerializeField] protected Animator animator;
 
     protected int ammoCount; // Total number of rounds carried by the player
     protected int ammoInMag; // Number of rounds in a magazine
     protected float nextTimeToFire = 0f;
     protected bool isReloading = false;
+    protected Camera playerCamera;
+    protected Animator animator;
 
-    void Start()
+    protected void Awake()
+    {
+        playerCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
+        animator = gameObject.GetComponentInParent<Animator>();
+    }
+
+    protected void Start()
     {
         Refill();
     }
