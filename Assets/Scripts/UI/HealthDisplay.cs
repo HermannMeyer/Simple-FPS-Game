@@ -1,12 +1,16 @@
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class HealthDisplay : MonoBehaviour
 {
-    [SerializeField] Text healthText;
     [SerializeField] Transform player;
+    TextMeshProUGUI healthText;
 
-    // Start is called before the first frame update
+    private void Awake()
+    {
+        healthText = gameObject.GetComponent<TextMeshProUGUI>();
+    }
 
     // Update is called once per frame
     void Update()

@@ -1,10 +1,16 @@
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class GrenadeDisplay : MonoBehaviour
 {
     [SerializeField] Camera mainCamera;
-    [SerializeField] Text text;
+    TextMeshProUGUI text;
+
+    void Awake() 
+    {
+        text = GetComponent<TextMeshProUGUI>();
+    }
 
     // Update is called once per frame
     void Update()

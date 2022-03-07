@@ -57,4 +57,9 @@ public class ObjectDeployer : MonoBehaviour
     {
         return objectCount;
     }
+
+    public string GetObjectName()
+    {
+        return objectPrefab.name;
+    }
 }

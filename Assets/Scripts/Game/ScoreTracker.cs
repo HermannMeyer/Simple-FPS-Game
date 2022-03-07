@@ -1,22 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class ScoreTracker : MonoBehaviour
 {
-    [SerializeField] int score = 0;
     [SerializeField] int balance;
+    [SerializeField] GameObject scoreDisplayObj;
+
+    TextMeshProUGUI scoreDisplay;
 
     void Awake()
     {
-        balance = score;
+        scoreDisplay = scoreDisplayObj.GetComponent<TextMeshProUGUI>();
+        scoreDisplay.text = "Points: " + balance.ToString();
     }
-
-    public int GetScore()
-    {
-        return score;
-    }
-
     public int GetBalance()
     {
         return balance;
@@ -24,13 +22,14 @@ public class ScoreTracker : MonoBehaviour
 
     public void AddToScore(int addend)
     {
-        score += addend;
         balance += addend;
-        print("Current score: " + score);
+        scoreDisplay.text = "Points: " + balance.ToString();
+        print("Current balance: " + balance);
     }
 
     public void SubtractFromBalance(int subtrahend)
     {
         balance -= subtrahend;
+        scoreDisplay.text = "Points: " + balance.ToString();
     }
 }

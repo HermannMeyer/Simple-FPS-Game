@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -14,11 +15,13 @@ public class GameDirector : MonoBehaviour
     public float waveCooldown;
     public int enemiesRemaining;
     public EnemySpawner enemySpawner;
-    public Text waveDisplay;
-    public Text waveTimer;
+    [SerializeField] GameObject waveDisplayObj;
+    [SerializeField] GameObject waveTimerObj;
 
     GameObject player;
     PlayerHealth health;
+    TextMeshProUGUI waveTimer;
+    TextMeshProUGUI waveDisplay;
 
     bool waveInProgress;
     bool hasSpawnedEnemies;
@@ -31,7 +34,8 @@ public class GameDirector : MonoBehaviour
         {
             enemySpawner = GameObject.FindObjectOfType<EnemySpawner>();
         }
-
+        waveTimer = waveTimerObj.GetComponent<TextMeshProUGUI>();
+        waveDisplay = waveDisplayObj.GetComponent<TextMeshProUGUI>();
         player = GameObject.FindGameObjectWithTag("Player");
         health = player.GetComponent<PlayerHealth>();
     }

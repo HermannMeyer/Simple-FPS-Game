@@ -1,11 +1,17 @@
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class WeaponDisplay : MonoBehaviour
 {
     // public GameObject weaponHolder;
-    [SerializeField] Text weaponText;
     [SerializeField] Transform weaponHolder;
+    TextMeshProUGUI weaponText;
+
+    private void Awake()
+    {
+        weaponText = GetComponent<TextMeshProUGUI>();
+    }
 
     // Update is called once per frame
     void Update()
