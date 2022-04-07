@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class LauncherController : GunController
 {
-    [SerializeField] GameObject projectilePrefab;
-    [SerializeField] GameObject muzzle;
-    [SerializeField] float initialForce = 0f;
+    [SerializeField] GameObject projectilePrefab; // Prefab of the launcher's projectile
+    [SerializeField] GameObject muzzle; // Position of the muzzle
+    [SerializeField] float initialForce = 0f; // Initial force to be applied to the projectile
 
+    // Update is called once per frame.
     void Update()
     {
         if (isReloading)
@@ -28,6 +29,7 @@ public class LauncherController : GunController
         }
     }
 
+    // Different version of Shoot, which discharges a physical projectile rather than a ray.
     new void Shoot()
     {
         // Muzzle Flash effect

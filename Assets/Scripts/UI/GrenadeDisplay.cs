@@ -7,6 +7,7 @@ public class GrenadeDisplay : MonoBehaviour
     [SerializeField] Camera mainCamera;
     TextMeshProUGUI text;
 
+    // Awake is called as the script instance is loaded (before Start).
     void Awake() 
     {
         text = GetComponent<TextMeshProUGUI>();
@@ -17,6 +18,7 @@ public class GrenadeDisplay : MonoBehaviour
     {
         GrenadeThrower grenadeThrower = mainCamera.GetComponent<GrenadeThrower>();
         int grenadeCount = grenadeThrower.GetGrenadeCount();
+        // Display the current number of grenades.
         text.text = "Grenade: " + grenadeCount;
     }
 }

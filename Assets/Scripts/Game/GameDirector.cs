@@ -28,6 +28,7 @@ public class GameDirector : MonoBehaviour
     bool gameOver;
     GameObject[] enemies;
 
+    // Awake is called as the script instance is loaded (before Start).
     void Awake()
     {
         if (enemySpawner == null)
@@ -56,10 +57,10 @@ public class GameDirector : MonoBehaviour
         UpdateWaveUI();
     }
 
-    // Update is called once per frame
+    // Update is called once per frame.
     void Update()
     {
-        // If the game is over, end the game (for now)
+        // If the game is over, end the game
         if (gameOver)
         {
             EndGame();
@@ -79,6 +80,7 @@ public class GameDirector : MonoBehaviour
                     enemySpawner.AddMoreEnemies();
                     // Update the current enemy count so that the spawner can spawn more
                     enemySpawner.UpdateCounts();
+                    // Spawn enemies
                     enemySpawner.SpawnEnemies();
                 }
 
@@ -137,6 +139,7 @@ public class GameDirector : MonoBehaviour
         }
     }
 
+    // Update the Wave UI to display the current wave in progress.
     void UpdateWaveUI()
     {
         waveDisplay.text = "Wave: " + currentWave + "/" + maxWave;
@@ -144,7 +147,6 @@ public class GameDirector : MonoBehaviour
 
     void EndGame()
     {
-        // TODO - Display game over scene
         // For now, this will simply quit the game
 #if UNITY_EDITOR
         EditorApplication.ExitPlaymode();

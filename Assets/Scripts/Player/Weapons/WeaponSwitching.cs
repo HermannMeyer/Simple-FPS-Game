@@ -6,13 +6,13 @@ public class WeaponSwitching : MonoBehaviour
 {
     [SerializeField] int currentWeapon = 0;
 
-    // Start is called before the first frame update
+    // Start is called before the first frame update.
     void Start()
     {
         SelectWeapon();
     }
 
-    // Update is called once per frame
+    // Update is called once per frame.
     void Update()
     {
         // Variable to keep track of previously held weapon
@@ -71,6 +71,7 @@ public class WeaponSwitching : MonoBehaviour
         }
     }
 
+    // Choose a certain weapon to use.
     void SelectWeapon()
     {
         int i = 0;
@@ -89,6 +90,7 @@ public class WeaponSwitching : MonoBehaviour
         }
     }
 
+    // Add a certain weapon to the weapon holder for use by the player.
     public bool AddWeapon(GameObject weaponPrefab)
     {
         string weaponName = weaponPrefab.GetComponent<GunController>().GetWeaponName();
@@ -105,8 +107,10 @@ public class WeaponSwitching : MonoBehaviour
         return true;
     }
 
+    // Remove a certain weapon from the holder.
+    // Currently a placeholder.
     public void RemoveWeapon()
     {
-
+        // Placeholder
     }
 }

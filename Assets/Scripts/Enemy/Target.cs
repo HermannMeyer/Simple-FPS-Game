@@ -9,6 +9,7 @@ public class Target : MonoBehaviour
     ScoreTracker scoreTracker;
     GameDirector gameDirector;
 
+    // Awake is called as the script instance is loaded (before Start).
     private void Awake()
     {
         if (gameDirector == null)
@@ -18,6 +19,7 @@ public class Target : MonoBehaviour
         }
     }
 
+    // Take damage by subtracting the current health points by the amount of damage received. If health falls below 0, the target dies.
     public void TakeDamage(float dmg)
     {
         health -= dmg;
@@ -28,15 +30,17 @@ public class Target : MonoBehaviour
         }
     }
 
+    // Return the current amount of health.
     public float GetHealth()
     {
         return health;
     }
 
+    // Called when the target is about to die. Add points to the player's balance, and destroy the target's game object.
     void Die()
     {
         // Add the target's score value to the total score
-        scoreTracker.AddToScore(targetScore);
+        scoreTracker.AddToBalance(targetScore);
         Destroy(gameObject, .1f);
     }
 }
