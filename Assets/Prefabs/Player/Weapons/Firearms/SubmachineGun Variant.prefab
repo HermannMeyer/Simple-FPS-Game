@@ -88,6 +88,10 @@ PrefabInstance:
       value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 3493289084621548626, guid: 5a06729af4143664a9ee40da356e7a87, type: 3}
+      propertyPath: maxAmmoCount
+      value: 160
+      objectReference: {fileID: 0}
+    - target: {fileID: 3493289084621548626, guid: 5a06729af4143664a9ee40da356e7a87, type: 3}
       propertyPath: playerCamera
       value: 
       objectReference: {fileID: 0}
