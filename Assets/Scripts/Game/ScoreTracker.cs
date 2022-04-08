@@ -1,37 +1,40 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class ScoreTracker : MonoBehaviour
 {
-    [SerializeField] int score;
-    [SerializeField] int money;
+    [SerializeField] int balance; // The player's current point balance
+    [SerializeField] GameObject scoreDisplayObj; // Score display UI game object
 
+    TextMeshProUGUI scoreDisplay; // Score display text
+
+    // Awake is called as the script instance is loaded (before Start).
     void Awake()
     {
-        score = 0;
-        money = score;
+        scoreDisplay = scoreDisplayObj.GetComponent<TextMeshProUGUI>();
+        scoreDisplay.text = "Points: " + balance.ToString();
     }
 
-    public int GetScore()
+    // Return the current point balance of the player.
+    public int GetBalance()
     {
-        return score;
+        return balance;
     }
 
-    public int GetMoney()
+    // Add points to the point balance.
+    public void AddToBalance(int addend)
     {
-        return money;
+        balance += addend;
+        scoreDisplay.text = "Points: " + balance.ToString();
+        print("Current balance: " + balance);
     }
 
-    public void AddToScore(int addend)
+    // Subtract points from the point balance.
+    public void SubtractFromBalance(int subtrahend)
     {
-        score += addend;
-        money += addend;
-        print("Current score: " + score);
-    }
-
-    public void SubtractMoney(int subtrahend)
-    {
-        money -= subtrahend;
+        balance -= subtrahend;
+        scoreDisplay.text = "Points: " + balance.ToString();
     }
 }

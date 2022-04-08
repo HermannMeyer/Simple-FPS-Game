@@ -45,9 +45,10 @@ public class SentryGunController : MonoBehaviour
     // If so, engage the target until it is neutralized
     bool isLocked = false;
 
-    //
+    // Time between each round discharged
     float nextTimeToFire = 0f;
 
+    // Awake is called as the script instance is loaded (before Start).
     void Awake()
     {
         ammoCount = maxAmmo;
@@ -81,6 +82,7 @@ public class SentryGunController : MonoBehaviour
         }
     }
 
+    // Attack the target currently locked onto.
     bool EngageTarget()
     {
         // Check if the target is visible
@@ -106,6 +108,7 @@ public class SentryGunController : MonoBehaviour
         return true;
     }
 
+    // // Discharge a round towards a desired direction.
     void Shoot()
     {
         RaycastHit hit;

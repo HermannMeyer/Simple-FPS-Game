@@ -145,7 +145,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetScore: 50
-  health: 100
+  health: 120
 --- !u!114 &7346838444141303393
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -172,7 +172,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cooldown: 1.5
-  damage: 25
+  damage: 40
 --- !u!195 &7346838444141303392
 NavMeshAgent:
   m_ObjectHideFlags: 0

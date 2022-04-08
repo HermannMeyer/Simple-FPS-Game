@@ -11,10 +11,9 @@ public class ExplosiveController : MonoBehaviour
     // Damage that will be inflicted upon objects
     [SerializeField] protected float damage = 80f;
 
+    // Reproduce explosion effect in Unity. Apply a force to any object with a Rigidbody and deal damage to both enemies and player.
     protected void Explode()
     {
-        // TODO - Add explosion effect
-
         // Get all nearby objects
         Collider[] colliders = Physics.OverlapSphere(transform.position, blastRadius);
 

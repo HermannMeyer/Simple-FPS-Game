@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -14,24 +15,28 @@ public class GameDirector : MonoBehaviour
     public float waveCooldown;
     public int enemiesRemaining;
     public EnemySpawner enemySpawner;
-    public Text waveDisplay;
-    public Text waveTimer;
+    [SerializeField] GameObject waveDisplayObj;
+    [SerializeField] GameObject waveTimerObj;
 
     GameObject player;
     PlayerHealth health;
+    TextMeshProUGUI waveTimer;
+    TextMeshProUGUI waveDisplay;
 
     bool waveInProgress;
     bool hasSpawnedEnemies;
     bool gameOver;
     GameObject[] enemies;
 
+    // Awake is called as the script instance is loaded (before Start).
     void Awake()
     {
         if (enemySpawner == null)
         {
             enemySpawner = GameObject.FindObjectOfType<EnemySpawner>();
         }
-
+        waveTimer = waveTimerObj.GetComponent<TextMeshProUGUI>();
+        waveDisplay = waveDisplayObj.GetComponent<TextMeshProUGUI>();
         player = GameObject.FindGameObjectWithTag("Player");
         health = player.GetComponent<PlayerHealth>();
     }
@@ -52,10 +57,10 @@ public class GameDirector : MonoBehaviour
         UpdateWaveUI();
     }
 
-    // Update is called once per frame
+    // Update is called once per frame.
     void Update()
     {
-        // If the game is over, end the game (for now)
+        // If the game is over, end the game
         if (gameOver)
         {
             EndGame();
@@ -75,6 +80,7 @@ public class GameDirector : MonoBehaviour
                     enemySpawner.AddMoreEnemies();
                     // Update the current enemy count so that the spawner can spawn more
                     enemySpawner.UpdateCounts();
+                    // Spawn enemies
                     enemySpawner.SpawnEnemies();
                 }
 
@@ -133,6 +139,7 @@ public class GameDirector : MonoBehaviour
         }
     }
 
+    // Update the Wave UI to display the current wave in progress.
     void UpdateWaveUI()
     {
         waveDisplay.text = "Wave: " + currentWave + "/" + maxWave;
@@ -140,7 +147,6 @@ public class GameDirector : MonoBehaviour
 
     void EndGame()
     {
-        // TODO - Display game over scene
         // For now, this will simply quit the game
 #if UNITY_EDITOR
         EditorApplication.ExitPlaymode();

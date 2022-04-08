@@ -11,25 +11,28 @@ public class EnemySuicideAttack : MonoBehaviour
     [SerializeField] float timeToExplode = 1.5f;
 
     float countdown;
-    bool isInRange = false;
-    bool hasExploded = false;
+    bool isInRange = false; // Whether the player is in range of the enemy or not.
+    bool hasExploded = false; // Whether the enemy has exploded or not.
     GameObject player;
     
+    // Start is called before the first frame update.
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
         countdown = timeToExplode;
     }
 
+    // Activates when an object enters the Trigger attached to the game object this script is attached to.
+    // If the game object is the player, then they are within range of the enemy's attack.
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject == player)
+        if (other.gameObject.CompareTag("Player"))
         {
             isInRange = true;
         }    
     }
 
-    // Update is called once per frame
+    // Update is called once per frame.
     void Update()
     {
         if (isInRange)
@@ -44,10 +47,9 @@ public class EnemySuicideAttack : MonoBehaviour
         }
     }
 
+    // Reproduce explosion effect in Unity. Apply a force to any object with a Rigidbody and deal damage to both enemies and player.
     void Explode()
     {
-        // TODO - Add explosion effect
-
         // Get all nearby objects
         Collider[] colliders = Physics.OverlapSphere(transform.position, blastRadius);
 
