@@ -14,6 +14,7 @@ This project is designed to be used with Unity version 2021.2.0f1. However, it i
 - Download and extract the project files to a desired location
 - Use the Unity launcher to locate the location and run the project
 - After the project successfully loads, use the "Play" button in the Editor to start playing
+
 Currently, there is no finished build for this project available.
 
 ## Features
